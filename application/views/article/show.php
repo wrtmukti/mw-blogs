@@ -1,6 +1,6 @@
 <div class="container mt-5 ">
   <div class="">
-    <div class="row py-5 grey lighten-5 shadow">
+    <div class="row py-5 grey lighten-5  shadow-lg mt-5">
       <div class="col-12">
         <?php foreach ($articles as $article) : ?>
           <div class="row border-bottom-dark mb-3 ">
@@ -9,10 +9,13 @@
                 <?= $article['title']; ?>
               </h3>
               <hr>
-              <div class=" text-muted mt-3 mb-1">dibuat pada:
+              <div class=" text-muted mt-3 mb-1">Penulis:
+                <?= $article['name']; ?>
+              </div>
+              <div class=" text-muted mt-3 mb-1">Dibuat pada:
                 <?= date('d F Y', $article['created_at']); ?>
               </div>
-              <div class=" text-muted float-left mb-3">update terakhir:
+              <div class=" text-muted float-left mb-3">Update terakhir:
                 <?= date('d F Y', $article['updated_at']); ?>
               </div>
             </div>
@@ -25,7 +28,7 @@
           <div class="row ">
             <div class="col-12 ">
               <div class="float-right">
-                <a href="<?= base_url('article/') ?>" class="btn btn-primary rounded-pill ">Kembali</a>
+                <a href="<?= base_url('article/') ?>" class="btn btn-grey rounded-pill ">Kembali</a>
               </div>
             </div>
           </div>

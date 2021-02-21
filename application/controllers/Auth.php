@@ -14,11 +14,13 @@ class Auth extends CI_Controller
     if ($this->session->userdata('email')) {
       redirect('user');
     }
-    $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+    $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email', [
+      'required' => 'Email tidak boleh kosong',
+      'valid_email' => 'Email salah'
+    ]);
     $this->form_validation->set_rules('password', 'Password', 'required|trim', [
       // ngasi pesan sendiri key => value
-      'matches' => 'password tidak sama',
-      'min_length' => 'password minimum 6 karakter'
+      'required' => 'Password tidak boleh kosong',
     ]);
     if ($this->form_validation->run() == false) {
       $data['title'] = 'Login';
@@ -37,7 +39,6 @@ class Auth extends CI_Controller
     $password = $this->input->post('password');
 
     $users = $this->db->get_where('users', ['email' => $email])->row_array();
-    // var_dump($users);    // die;
     // jika usermya ada
     if ($users) {
       // jika usernya aktivated
@@ -87,17 +88,27 @@ class Auth extends CI_Controller
     }
     // validasi
     // (name dari form, alias, rules1|rules2)
-    $this->form_validation->set_rules('name', 'Name', 'required');
-    $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[users.username]');
-    $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[users.email]');
+    $this->form_validation->set_rules('name', 'Name', 'required', [
+      'required' => 'Nama tidak boleh kosong'
+    ]);
+    $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[users.username]', [
+      'required' => 'Username tidak boleh kosong',
+      'is_unique' => 'Username sudah terdaftar'
+    ]);
+    $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[users.email]', [
+      'required' => 'Email tidak boleh kosong',
+      'valid_email' => 'Email salah',
+      'is_unique' => 'Email sudah terdaftar sebelumnya'
+    ]);
     $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]|matches[password2]', [
       // ngasi pesan sendiri key => value
-      'matches' => 'password tidak sama',
-      'min_length' => 'password minimum 6 karakter'
+      'required' => 'Password tidak boleh kosong',
+      'matches' => 'Password tidak sama',
+      'min_length' => 'Password minimum 6 karakter'
     ]);
     $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]', [
-      'matches' => 'password tidak sama',
-      'min_length' => 'password minimum 6 karakter'
+      'matches' => 'Password tidak sama',
+      'min_length' => 'Password minimum 6 karakter'
     ]);
     if ($this->form_validation->run() == false) {
       $data['title'] = 'Registration';
@@ -226,7 +237,10 @@ class Auth extends CI_Controller
 
   public function forgotPassword()
   {
-    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', [
+      'required' => 'Email tidak boleh kosong',
+      'valid_email' => 'Email salah'
+    ]);
 
     if ($this->form_validation->run() == false) {
       $data['title'] = 'Forget Password';

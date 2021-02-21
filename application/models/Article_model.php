@@ -4,22 +4,35 @@ class Article_model extends CI_Model
   public function getAllArticle()
   {
     return $this->db
-      ->get('articles')->result_array();
+      ->order_by('updated_at', 'desc')
+      ->get('articles')
+      ->result_array();
   }
   public function getArticle($limit, $start, $keyword = NULL)
   {
+    // select('*')->from('articles')
     return $this->db
       ->like('title', $keyword)
+      ->join('users', 'users.id = articles.user_id')
+      ->order_by('updated_at', 'desc')
       ->get('articles', $limit, $start)
       ->result_array();
   }
-  public function getUserArticle($user_id, $limit, $start, $keyword = NULL)
+  public function getUserArticle($users_id, $limit, $start, $keyword = NULL)
   {
     return $this->db
-      ->where('user_id', $user_id)
+      ->where('user_id', $users_id)
       ->like('title', $keyword)
+      ->order_by('updated_at', 'desc')
       ->get('articles', $limit, $start)
       ->result_array();
+  }
+  public function countArticle($keyword = null)
+  {
+    return $this->db
+      ->like('title', $keyword)
+      ->from('articles')
+      ->count_all_results();
   }
   public function countUserArticle($users_id, $keyword = null)
   {
@@ -34,17 +47,12 @@ class Article_model extends CI_Model
   {
     return $this->db->get('articles')->num_rows();
   }
-  public function countArticle($keyword = null)
-  {
-    return $this->db
-      ->like('title', $keyword)
-      ->from('articles')
-      ->count_all_results();
-  }
+
   public function getArticleBySlug($slug)
   {
     return $this->db
       ->where('slug', $slug)
+      ->join('users', 'users.id = articles.user_id')
       ->get('articles')
       ->result_array();
   }

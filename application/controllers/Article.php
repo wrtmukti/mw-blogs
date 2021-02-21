@@ -6,12 +6,15 @@ class Article extends CI_Controller
   {
     Parent::__construct();
     $this->load->model('Article_model');
+    $this->load->model('User_model');
     $this->load->library('form_validation');
   }
   public function index()
   {
+    $data['allUsers'] = $this->db
+      ->get('users')->result_array();
     $data['users'] = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
-    $data['judul'] = " Artikel";
+    $data['judul'] = "Artikel";
     if ($this->session->userdata('keyword') == false) {
       $this->session->set_userdata('keyword', '');
     }
@@ -25,7 +28,7 @@ class Article extends CI_Controller
       $data['keyword'] = $_SESSION['keyword'];
     }
     $config['total_rows'] = $this->Article_model->countArticle($data['keyword']);
-    $config['per_page'] = 6;
+    $config['per_page'] = 3;
     // styling
     $config['full_tag_open'] = '<nav><ul class="pagination justify-content-center">';
     $config['full_tag_close'] = '</ul></nav>';
@@ -69,16 +72,14 @@ class Article extends CI_Controller
   public function create()
   {
     $data['users'] = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
-    $data['judul'] = "tambah artikel";
+    $data['judul'] = "Buat artikel";
     $this->load->view('templates/header', $data);
     $this->load->view('article/create', $data);
     $this->load->view('templates/footer');
   }
   public function store()
   {
-    // validasi form
     $this->form_validation->set_rules('title', 'Title', 'required', [
-      // ngasi pesan sendiri key => value
       'required' => 'judul tidak boleh kosong',
     ]);
     $this->form_validation->set_rules('body', 'Body', 'required', [
@@ -86,33 +87,42 @@ class Article extends CI_Controller
     ]);
     // cek validasi
     if ($this->form_validation->run() == false) {
+      $data['judul'] = "Buat artikel";
+      $data['users'] = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
+      $this->load->view('templates/header', $data);
+      $this->load->view('article/create', $data);
+      $this->load->view('templates/footer');
     } else {
       $this->Article_model->createArticle();
+      $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat kamu berhasil membuat artikel baru :)</div>');
+      redirect('user/dashboard');
     }
-    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat kamu berhasil membuat artikel baru :)</div>');
-    redirect('user/dashboard');
-
-    //  redirect(base_url());
   }
   public function edit($slug)
   {
     $data['users'] = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
-    $data['judul'] = 'Update Artikel';
+    $data['judul'] = 'Edit Artikel';
     $data['articles'] = $this->Article_model->getArticleBySlug($slug);;
-
     $this->load->view('templates/header', $data);
     $this->load->view('article/edit', $data);
     $this->load->view('templates/footer');
   }
   public function update($slug)
   {
+    $this->form_validation->set_rules('title', 'Title', 'required', [
+      'required' => 'Judul tidak boleh kosong',
+    ]);
     $this->form_validation->set_rules('body', 'Body', 'required', [
-      'required' => 'isi tidak boleh kosong',
+      'required' => 'Isi tidak boleh kosong',
     ]);
     // cek validasi
     if ($this->form_validation->run() == false) {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Update artikel gagl:(</div>');
-      redirect('user/dashboard');
+      $data['users'] = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
+      $data['judul'] = 'Update Artikel';
+      $data['articles'] = $this->Article_model->getArticleBySlug($slug);;
+      $this->load->view('templates/header', $data);
+      $this->load->view('article/edit/' . $slug, $data);
+      $this->load->view('templates/footer');
     } else {
       $this->Article_model->updateArticle($slug);
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Update artikel berhasil:)</div>');

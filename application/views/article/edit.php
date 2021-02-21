@@ -1,9 +1,16 @@
-<div class="container">
-  <div class="row py-5 mt-5">
-    <div class="col">
+<div class="container mt-5">
+  <div class="jumbotron jumbotron-fluid grey grey aqua-gradient text-white">
+    <div class="container">
+      <div class=" col-3">
+        <h1 class="display-5 mb-0 ">Edit Artikel</h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 mx-auto">
       <?php foreach ($articles as $article) : ?>
-        <div class="card">
-          <div class="card-header">Edit Artikel</div>
+        <div class="card shadow-lg">
+          <!-- <div class="card-header">Edit Artikel</div> -->
           <div class="card-body">
             <form action="<?= base_url() ?>article/update/<?= $article['slug']; ?>" method="POST">
               <div class="mb-3 form-group">

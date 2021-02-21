@@ -40,7 +40,7 @@
         <div class="form-group row py-2">
           <label for="username" class="col-sm-2 col-form-label">Password</label>
           <div class="col-sm-10">
-            <a class="btn btn-success my-2 my-sm-0  rounded-pill" href="<?= base_url('user/changepassword') ?>">Ubah?</a>
+            <a class="btn btn-info my-2 my-sm-0  rounded-pill" href="<?= base_url('user/changepassword') ?>">Ubah?</a>
           </div>
         </div>
         <!-- gambar -->
