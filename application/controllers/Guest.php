@@ -17,7 +17,6 @@ class Guest extends CI_Controller
     $this->load->view('templates/footer');
   }
 
-
   public function user($id)
   {
     $data['judul'] = "User Dashboard";
@@ -59,7 +58,7 @@ class Guest extends CI_Controller
     $config["attributes"] = ['class' => 'page-link'];
 
     $this->pagination->initialize($config);
-    $data['start'] = $this->uri->segment(5); //parameter di url
+    $data['start'] = $this->uri->segment(4); //parameter di url
     $data['articles'] = $this
       ->Article_model
       ->getUserArticle($id, $config['per_page'], $data['start'], $data['keyword']);

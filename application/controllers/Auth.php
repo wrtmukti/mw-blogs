@@ -152,8 +152,8 @@ class Auth extends CI_Controller
     $config = [
       'protocol'  => 'smtp', //simple mail transfer protocol
       'smtp_host' => 'ssl://smtp.googlemail.com',
-      'smtp_user' => 'wrtmtest@gmail.com', // isi gmail
-      'smtp_pass' => 'gallardo109', // isi password gmail
+      'smtp_user' => '', // isi gmail
+      'smtp_pass' => '', // isi password gmail
       'smtp_port' => 465, //port smtp google
       'mailtype'  => 'html', //ada link (bagian dr html)
       'charset'   => 'utf-8',
@@ -162,9 +162,9 @@ class Auth extends CI_Controller
 
     // masukin konfigurasi
     $this->load->library('email', $config);
-    $this->email->initialize($config);  //tambahkan baris ini
+    $this->email->initialize($config);
 
-    $this->email->from('wrtmtest@gmail.com', 'MW.dev');
+    $this->email->from('', ''); // 'email', 'sender name'
     $this->email->to($this->input->post('email'));
 
     // cek verifikasi dan forgot password

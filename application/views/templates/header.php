@@ -86,7 +86,7 @@
             </div>
           <?php } else {  ?>
             <div class="mx-3">
-              <div class="row nav-item dropdown">
+              <div class="row nav-item dropdown" data-toggle="dropdown">
                 <!-- photos -->
                 <img src="<?= base_url('assets/img/profile/') . $users['image']; ?>" class="rounded-circle z-depth-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="avatar image" height="45" width="45">
                 <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink">

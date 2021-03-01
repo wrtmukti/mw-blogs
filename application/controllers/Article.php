@@ -11,13 +11,15 @@ class Article extends CI_Controller
   }
   public function index()
   {
+
     $data['allUsers'] = $this->db
       ->get('users')->result_array();
     $data['users'] = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
     $data['judul'] = "Artikel";
-    if ($this->session->userdata('keyword') == false) {
-      $this->session->set_userdata('keyword', '');
-    }
+
+
+    $this->session->set_userdata('keyword', '');
+
     // pagination
     $this->load->library('pagination');
     $config['base_url'] = 'http://localhost/blog-codeigniter/article/index';

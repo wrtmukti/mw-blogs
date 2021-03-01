@@ -152,7 +152,7 @@ class User extends CI_Controller
     $config["attributes"] = ['class' => 'page-link'];
 
     $this->pagination->initialize($config);
-    $data['start'] = $this->uri->segment(4);
+    $data['start'] = $this->uri->segment(3);
     $data['articles'] = $this
       ->Article_model
       ->getUserArticle($data['users_id'], $config['per_page'], $data['start'], $data['keyword']);
