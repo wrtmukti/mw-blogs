@@ -20,4 +20,5 @@ autentikasi
 <li>html</li>
 <li>css(bootstrap 4)</li>
 <li>javascript(jquery)</li>
+<li>database(postgreSQL)</li>
 	</ul>
