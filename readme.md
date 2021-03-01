@@ -1,4 +1,4 @@
-#mw-blogs
+<h1>mw-blogs</>
 sebuah website sederhana untuk menulis artikel secara bersama
 
 test
