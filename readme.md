@@ -1,19 +1,23 @@
-<h1>mw-blogs</>
-sebuah website sederhana untuk menulis artikel secara bersama
+<h1>mw-blogs</h1>
+<p>sebuah website sederhana untuk menulis artikel secara bersama</p>
 
-test
+test : 
 [mw-blogs.herokuapp.com](http://mw-blogs.herokuapp.com/)
 
-####fitur
-*crud artikel dengan validasi keamanan
+<h3>fitur</h3>
+	crud artikel dengan validasi keamanan
 autentikasi
-*login register
-*email verification
-*forgot password
-\*edit profile with image
+<ul>
+<li>login register</li>
+<li>email verification</li>
+<li>forgot password</li>
+<li>edit profile with image</li>
+	</ul>
 
-####website ini dibuat dengan menggunakan
-*php(codeigniter 3)
-*html
-*css(bootstrap 4)
-*javascript(jquery)
+<h3>website ini dibuat dengan menggunakan</h3>
+<ul>
+<li>php(codeigniter 3)</li>
+<li>html</li>
+<li>css(bootstrap 4)</li>
+<li>javascript(jquery)</li>
+	</ul>
