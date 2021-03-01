@@ -5,8 +5,12 @@ test :
 [mw-blogs.herokuapp.com](http://mw-blogs.herokuapp.com/)
 
 <h3>fitur</h3>
-	crud artikel dengan validasi keamanan
-autentikasi
+<ul>
+<li>crud artikel dengan validasi keamanan</li>
+<li>search artikel</li>
+</ul>
+	
+<h4>autentikasi</h4>
 <ul>
 <li>login register</li>
 <li>email verification</li>
